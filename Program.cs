@@ -115,6 +115,8 @@ class Program
         int groupSize = ValidAgeInput("Enter the number of people in the group: ");
         Console.WriteLine();
 
+        List<string> totalReceipt = new();
+
         int totalPrice = 0;
 
         for (int i = 1; i <= groupSize; i++)
@@ -122,34 +124,58 @@ class Program
             int age = ValidAgeInput($"Enter the age of person {i}: ");
             Console.WriteLine();
 
+            string ticketType;
+            int price;
+
             if (age < 5 || age >= 100)
             {
                 Console.WriteLine("The ticket is for Free! ~ WooHoo!");
+                ticketType = "~ FREE ~";
+                price = 0;
             }
             else if (age < 20)
             {
                 Console.WriteLine("The ticket price for youth is: 80 SEK.");
-                totalPrice += 80;
+                ticketType = "Youth (< 20)";
+                price = 80;
             }
             else if (age >= 65)
             {
                 Console.WriteLine("The ticket price for seniors is: 90 SEK.");
-                totalPrice += 90;
+                ticketType = "Senior (65+)";
+                price = 90; 
             }
             else
             {
                 Console.WriteLine("The standard ticket price is: 120 SEK.");
-                totalPrice += 120;
+                ticketType = "Standard";
+                price = 120;
+                
             }
+
+            totalPrice += price;
+
             Console.WriteLine();
+            totalReceipt.Add($"{i,-5} {age ,-5} {"yrs",-6} {ticketType,-18} {price,5} SEK");
         }
+
+        Console.Clear();
+        Console.WriteLine("================================================");
+        Console.WriteLine("============== CINEMA RECEIPT ==================");
+        Console.WriteLine("================================================");
+        Console.WriteLine();
+
+        Console.WriteLine("No.   Age         Type              Price");
         Console.WriteLine("-----------------------------------------------");
+
+        foreach (var line in totalReceipt)
+        {
+            Console.WriteLine(line);
+        }
+
         Console.WriteLine();
-        Console.WriteLine("===== Group Summary =====");
-        Console.WriteLine();
-        Console.WriteLine($"Number of people: {groupSize}");
-        Console.WriteLine($"Total price for this group: {totalPrice} SEK");
-        Console.WriteLine();
+        Console.WriteLine("-----------------------------------------------");
+        Console.WriteLine($"Total price for these ({groupSize} people): {totalPrice} SEK");
         Console.WriteLine("-----------------------------------------------");
         Console.WriteLine();
 
