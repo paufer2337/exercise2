@@ -1,83 +1,65 @@
-# exercise2
 === C# Övning 2 - Loopar & Strängmanipulation ===
 ___________________________________________________________
 
 
-- Hur är programmets struktur uppbyggd?
+¤ Hur är programmets struktur uppbyggd?
 
-Svar: Program (UI + menystruktur med huvudmeny och undermeny för biljetter)
-
+ - Program (UI + meny med huvudmeny och undermeny för biljetter)
 
 ===========================================================
 
 
-- Vilka funktioner/metoder innehåller programmet?
+¤ Vilka funktioner/metoder innehåller programmet?
 
-Svar:
 
 ~ Huvudmeny:
-    Main            = Startar programmet och hanterar huvudmeny i loop
-    TicketMenu      = Undermeny för biljettval (single/group)
+|   Main            = Startar programmet och hanterar huvudmeny i loop        |
+|   TicketMenu      = Undermeny för biljettval (single/group)                 |
 
 ~ Funktioner:
-    CheckPrice      = Räknar ut biljettpris baserat på ålder
-    GroupPrice      = Räknar totalpris för grupp + genererar kvitto
-    RepeatText10    = Skriver ut användarens text 10 gånger i rad (utan radbrytning)
-    GetThirdWord    = Hämtar tredje ordet från en mening
+|   CheckPrice      = Räknar ut biljettpris baserat på ålder                  |
+|   GroupPrice      = Räknar totalpris för grupp + genererar kvitto           |
+|   RepeatText10    = Skriver ut text 10 gånger (utan radbrytning)            |
+|   GetThirdWord    = Hämtar tredje ordet från en mening                      |
 
 ~ Hjälpmetoder:
-    ValidAgeInput   = Validerar ålder (0–130)
-    ValidGroupSize  = Validerar antal personer i grupp
-    CountDownToMenu = Timer innan återgång till meny
-
+|   ValidAgeInput   = Validerar ålder (0–130)                                 |
+|   ValidGroupSize  = Validerar antal personer i grupp                        |
+|   CountDownToMenu = Timer innan återgång till meny                          |
 
 ===========================================================
 
 
-- Vad innehåller programmet logiskt?
+¤ Vad innehåller programmet logiskt?
 
-Svar:
 
 ~ Kontrollflöde:
-    if / else       = För biljettlogik (barn, ungdom, vuxen, senior)
-    switch          = För menyval
+|   if / else   = Biljettlogik (barn, ungdom, vuxen, senior)                  |
+|   switch      = Hanterar menyval                                            |
 
 ~ Loopar:
-    while           = Håller menyer igång
-    for             = Itererar genom grupp och repetition x10
+|   while       = Håller menyer igång                                         |
+|   for         = Itererar grupp + repetition x10                             |
 
 ~ Stränghantering:
-    Split()         = Delar upp mening i ord
-    Indexering      = Hämtar tredje ordet
-
-
-===========================================================
-
-
-- Extra funktionalitet:
-
-
-~ Input-validering:
-    - Hanterar ogiltig input (text istället för siffror)
-    - Begränsning av ålder och gruppstorlek
-    - Meddelande vid stora grupper (>150 personer)
-
-~ UX/UI:
-    - Tydliga menyer
-    - Undermeny för bättre struktur
-    - Nedräkning vid fel/input
-    - Kvitto med sorterade biljettyper
-
+|   Split()     = Delar upp mening i ord                                      |
+|   Indexering  = Hämtar tredje ordet                                         |
 
 ===========================================================
 
+¤ Extra funktionalitet:
 
-- Hur körs programmet?
+
+|   Input-validering   = Hanterar felaktig input                              |
+|   Begränsningar      = Ålder + gruppstorlek                                 |
+|   Stora grupper      = Meddelande vid >150 personer                         |
+|   UX/UI              = Undermeny, tydliga flöden, kvitto                    |
+
+===========================================================
 
 cmd:
-
 dotnet run
-
 
 ===========================================================
 
+~ Tack för mig :) ~
