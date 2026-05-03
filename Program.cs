@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 
@@ -71,8 +72,37 @@ class Program
         Console.WriteLine();
         Console.WriteLine("===== Ticket Price By Age =====");
         Console.WriteLine();
-        
+        Console.WriteLine("Price List:");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("| Standard           : 120 SEK  |");
+        Console.WriteLine("| Senior  (65+)      : 90 SEK   |");
+        Console.WriteLine("| Youth   (< 20)     : 80 SEK   |");
+        Console.WriteLine("| Infants (0-4)      : FREE ~   |");
+        Console.WriteLine("| Elderly (100+)     : FREE ~   |");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine();
+
         int age = ValidAgeInput("Enter the age of the customer: ");
+        Console.WriteLine();
+        if (age < 5 || age >= 100)
+        {
+            Console.WriteLine("The ticket is for Free! ~ WooHoo!");
+        }
+        else if (age < 20)
+        {
+            Console.WriteLine("The ticket price for youth is: 80 SEK.");
+        }
+        else if (age >= 65)
+        {
+            Console.WriteLine("The ticket price for seniors is: 90 SEK.");
+        }
+        else
+        {
+            Console.WriteLine("The standard ticket price is: 120 SEK.");
+        }
+        Console.WriteLine();
+
+        CountDownToMenu();
     }
 
     static int ValidAgeInput(string message)
@@ -92,7 +122,7 @@ class Program
     {
         Console.WriteLine();
 
-        for (int i = 3; i > 0; i--)
+        for (int i = 4; i > 0; i--)
         {
             Console.Write($"\rReturning to menu in {i}...   ");
             Thread.Sleep(1000);
