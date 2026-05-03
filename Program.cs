@@ -21,10 +21,9 @@ class Program
             Console.WriteLine("===== Cinema Exercise Overview =====");
             Console.WriteLine("====================================");
             Console.WriteLine();
-            Console.WriteLine("1. Check ticket price by age");
-            Console.WriteLine("2. Calculate total price for each group");
-            Console.WriteLine("3. Repeat text x10 times");
-            Console.WriteLine("4. Find the third word in the sentence");
+            Console.WriteLine("1. Check ticket pricing based on age (single / group)");
+            Console.WriteLine("2. Repeat text x10 times");
+            Console.WriteLine("3. Find the 3th word in the sentence");
             Console.WriteLine();
             Console.WriteLine("0. Exit");
             Console.WriteLine();
@@ -42,15 +41,12 @@ class Program
             switch (action)
             {
                 case "1":
-                    CheckPrice();
+                    TicketMenu();
                     break;
-                case "2":
-                    GroupPrice();
-                    break;
-                /*case "3":
+                /*case "2":
                     RepeatText10Times();
                     break;
-                case "4":
+                case "3":
                     GetThirdWord();
                     break;*/
                 case "0":
@@ -66,6 +62,52 @@ class Program
     
     }
     
+
+    static void TicketMenu()
+    {
+        
+        bool subMenu = true;
+
+        while (subMenu)
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("===== Ticket Pricing Menu =====");
+            Console.WriteLine();
+            Console.WriteLine("1. Check ticket price for a single customer");
+            Console.WriteLine("2. Calculate total price for a group");
+            Console.WriteLine();
+            Console.WriteLine("0. Return to main menu");
+            Console.WriteLine();
+            Console.Write("Select an action: ");
+
+            string? action = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(action))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid action.");
+                CountDownToMenu();
+                return;
+            }
+
+            switch (action)
+            {
+                case "1":
+                    CheckPrice();
+                    break;
+                case "2":
+                    GroupPrice();
+                    break;
+                case "0":
+                    subMenu = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid action. Please select a valid option.");
+                    CountDownToMenu();
+                    break;
+            }
+        }    
+    }
 
 
     static void CheckPrice()
@@ -252,19 +294,19 @@ class Program
 
         int number;
         while (!int.TryParse(Console.ReadLine(), out number) || number <= 0 || number > 150)
-    {
-        Console.WriteLine();
-
-        if (number > 150)
         {
-            Console.WriteLine("~ Large group detected! ~");
-            Console.WriteLine("For groups over 150 people, please contact the cinema to book the entire venue. :)");
             Console.WriteLine();
-        }
 
-        Console.Write("Please enter a valid group size between 1 and 150: ");
-    }
-    return number;
+            if (number > 150)
+            {
+                Console.WriteLine("~ Large group detected! ~");
+                Console.WriteLine("For groups over 150 people, please contact the cinema to book the entire venue. :)");
+                Console.WriteLine();
+            }
+
+            Console.Write("Please enter a valid group size between 1 and 150: ");
+        }
+        return number;
 
     }
 
