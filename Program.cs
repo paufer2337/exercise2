@@ -328,12 +328,16 @@ class Program
         }
 
         Console.WriteLine();
-        Console.WriteLine($"Repeating '{input}' 10 times:");
-        Console.WriteLine();
+
 
         for (int i = 1; i <= 10; i++)
         {
-            Console.WriteLine($"{i}. {input}");
+            Console.Write($"{i}. {input}");
+
+            if (i < 10)
+            {
+                Console.Write(", "); // Prints a 'comma' after each line except the last one
+            }
         }
 
         Console.WriteLine();
