@@ -23,7 +23,7 @@ class Program
             Console.WriteLine();
             Console.WriteLine("1. Check ticket pricing based on age (single / group)");
             Console.WriteLine("2. Repeat text x10 times");
-            Console.WriteLine("3. Find the 3th word in the sentence");
+            Console.WriteLine("3. Find the 3rd word in the sentence");
             Console.WriteLine();
             Console.WriteLine("0. Exit");
             Console.WriteLine();
@@ -46,9 +46,9 @@ class Program
                 case "2":
                     LoopText10Times();
                     break;
-                /*case "3":
+                case "3":
                     GetThirdWord();
-                    break;*/
+                    break;
                 case "0":
                     isRunning = false;
                     Console.WriteLine("Exiting the program... Goodbye!");
@@ -318,7 +318,10 @@ class Program
         Console.WriteLine();
 
         Console.WriteLine("Please enter the text you want to repeat 10 times: ");
+        Console.WriteLine();
+        Console.WriteLine("--------------------------------------------------");
         string? input = Console.ReadLine();
+        Console.WriteLine("--------------------------------------------------");
 
         if (string.IsNullOrWhiteSpace(input))
         {
@@ -342,9 +345,49 @@ class Program
 
         Console.WriteLine();
         Console.WriteLine();
+        Console.WriteLine("--------------------------------------------------");
+        Console.WriteLine();
         Console.WriteLine("Press any key to return to Menu...");
         Console.ReadKey();
     }
+
+
+    static void GetThirdWord()
+    {
+        Console.WriteLine();
+        Console.WriteLine("===== Find the 3rd word in the sentence =====");
+        Console.WriteLine();
+
+        Console.WriteLine("Please enter a sentence with at least 3 words: ");
+        Console.WriteLine();
+        Console.WriteLine("--------------------------------------------------");
+        string? input = Console.ReadLine();
+        Console.WriteLine("--------------------------------------------------");
+
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            Console.WriteLine("Invalid input. Please enter a non-empty sentence.");
+            CountDownToMenu();
+            return;
+        }
+
+        string[] words = input.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+
+        if (words.Length < 3)
+        {
+            Console.WriteLine("The sentence must contain at least 3 words. Please try again.");
+            CountDownToMenu();
+            return;
+        }
+
+        Console.WriteLine();
+        Console.WriteLine($"The 3rd word in the sentence is: '{words[2]}'");
+        Console.WriteLine();
+
+        Console.WriteLine("Press any key to return to Menu...");
+        Console.ReadKey();
+    }
+
 
     static void CountDownToMenu()
     {
