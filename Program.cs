@@ -18,6 +18,7 @@ class Program
             Console.WriteLine();
             Console.WriteLine("====================================");
             Console.WriteLine("===== Cinema Exercise Overview =====");
+            Console.WriteLine("====================================");
             Console.WriteLine();
             Console.WriteLine("1. Check ticket price by age");
             Console.WriteLine("2. Calculate total price for each group");
@@ -36,10 +37,58 @@ class Program
                 CountDownToMenu();
                 continue;
             }
+
+            switch (action)
+            {
+                case "1":
+                    CheckPrice();
+                    break;
+                /*case "2":
+                    GroupPrice();
+                    break;
+                case "3":
+                    RepeatText10Times();
+                    break;
+                case "4":
+                    GetThirdWord();
+                    break;*/
+                case "0":
+                    isRunning = false;
+                    Console.WriteLine("Exiting the program... Goodbye!");
+                    break;
+                default:
+                    Console.WriteLine("Invalid action. Please select a valid option.");
+                    CountDownToMenu();
+                    break;
+            }
         }
+    
     }
     
-     static void CountDownToMenu()
+
+    static void CheckPrice()
+    {
+        Console.WriteLine();
+        Console.WriteLine("===== Ticket Price By Age =====");
+        Console.WriteLine();
+        
+        int age = ValidAgeInput("Enter the age of the customer: ");
+    }
+
+    static int ValidAgeInput(string message)
+    {
+        Console.Write(message);
+
+        int number;
+        while (!int.TryParse(Console.ReadLine(), out number) || number < 0)
+        {
+            Console.Write("Invalid input. Please try again and enter a valid age: ");
+        }
+
+        return number;
+    }
+
+    static void CountDownToMenu()
     {
         Console.WriteLine();
 
