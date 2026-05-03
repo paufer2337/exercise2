@@ -67,6 +67,7 @@ class Program
     }
     
 
+
     static void CheckPrice()
     {
         Console.WriteLine();
@@ -106,16 +107,23 @@ class Program
     }
 
 
+
+
     static void GroupPrice()
     {
         Console.WriteLine();
         Console.WriteLine("===== Total Price For Each Group =====");
         Console.WriteLine();
 
-        int groupSize = ValidAgeInput("Enter the number of people in the group: ");
+        int groupSize = ValidGroupSize("Enter the number of people in the group: ");
         Console.WriteLine();
 
-        List<string> totalReceipt = new();
+        Console.WriteLine();
+
+        List<string> standardTickets = new();
+        List<string> seniorTickets = new();
+        List<string> youthTickets = new();
+        List<string> freeTickets = new();
 
         int totalPrice = 0;
 
@@ -156,7 +164,25 @@ class Program
             totalPrice += price;
 
             Console.WriteLine();
-            totalReceipt.Add($"{i,-5} {age ,-5} {"yrs",-6} {ticketType,-18} {price,5} SEK");
+            string sortedLine = $"{(age + " yrs"),-10}{ticketType,-18}{price,5} SEK";
+
+            if (ticketType == "~ FREE ~")
+            {
+                freeTickets.Add(sortedLine);
+            }
+            else if (ticketType == "Youth (< 20)")
+            {
+                youthTickets.Add(sortedLine);
+            }
+            else if (ticketType == "Senior (65+)")
+            {
+                seniorTickets.Add(sortedLine);
+            }
+            else
+            {
+                standardTickets.Add(sortedLine);
+            }
+        
         }
 
         Console.Clear();
@@ -165,17 +191,39 @@ class Program
         Console.WriteLine("================================================");
         Console.WriteLine();
 
-        Console.WriteLine("No.   Age         Type              Price");
+        Console.WriteLine("No.   Age      Type                Price");
         Console.WriteLine("-----------------------------------------------");
 
-        foreach (var line in totalReceipt)
+        // Prints tickets order by: standard tickets first, then seniors, youth, and free tickets last
+        int receiptNumber = 1;
+
+        foreach (var line in standardTickets)
         {
-            Console.WriteLine(line);
+            Console.WriteLine($"{receiptNumber,-5}{line}");
+            receiptNumber++;
+        }
+
+        foreach (var line in seniorTickets)
+        {
+            Console.WriteLine($"{receiptNumber,-5}{line}");
+            receiptNumber++;
+        }
+
+        foreach (var line in youthTickets)
+        {
+            Console.WriteLine($"{receiptNumber,-5}{line}");
+            receiptNumber++;
+        }
+
+        foreach (var line in freeTickets)
+        {
+            Console.WriteLine($"{receiptNumber,-5}{line}");
+            receiptNumber++;
         }
 
         Console.WriteLine();
         Console.WriteLine("-----------------------------------------------");
-        Console.WriteLine($"Total price for these ({groupSize} people): {totalPrice} SEK");
+        Console.WriteLine($"Total price for these ({groupSize} people):  {totalPrice} SEK");
         Console.WriteLine("-----------------------------------------------");
         Console.WriteLine();
 
@@ -189,13 +237,37 @@ class Program
         Console.Write(message);
 
         int number;
-        while (!int.TryParse(Console.ReadLine(), out number) || number < 0)
+        while (!int.TryParse(Console.ReadLine(), out number) || number < 0 || number > 130)
         {
-            Console.Write("Invalid input. Please try again and enter a valid age: ");
+            Console.WriteLine();
+            Console.Write("Invalid input. Please try again and enter a valid age between 0 and 130: ");
         }
 
         return number;
     }
+
+    static int ValidGroupSize(string message)
+    {
+        Console.Write(message);
+
+        int number;
+        while (!int.TryParse(Console.ReadLine(), out number) || number <= 0 || number > 150)
+    {
+        Console.WriteLine();
+
+        if (number > 150)
+        {
+            Console.WriteLine("~ Large group detected! ~");
+            Console.WriteLine("For groups over 150 people, please contact the cinema to book the entire venue. :)");
+            Console.WriteLine();
+        }
+
+        Console.Write("Please enter a valid group size between 1 and 150: ");
+    }
+    return number;
+
+    }
+
 
     static void CountDownToMenu()
     {
