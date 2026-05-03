@@ -13,7 +13,7 @@ class Program
         bool isRunning = true;
 
 
-        while (isRunning)
+        while (isRunning) // Main loop: runs until user selects exit (0)
         {
             Console.Clear();
             Console.WriteLine();
@@ -31,14 +31,14 @@ class Program
 
             string? action = Console.ReadLine();
 
-            if (string.IsNullOrWhiteSpace(action))
+            if (string.IsNullOrWhiteSpace(action)) // Validates that the input is not null, empty, or whitespace. If it is, it displays error message and returns to menu.
             {
                 Console.WriteLine("Invalid input. Please enter a valid action.");
                 CountDownToMenu();
                 continue;
             }
 
-            switch (action)
+            switch (action) // Switch statement that handles the user's selection in the main menu. Calling appropriate method based on the user-choice, or exits the program if user selects "0". If the input is invalid, it displays error message and returns to menu.
             {
                 case "1":
                     TicketMenu();
@@ -63,12 +63,12 @@ class Program
     }
     
 
-    static void TicketMenu()
+    static void TicketMenu() // Show ticket menu and let user choose single or group pricing
     {
         
-        bool subMenu = true;
-
-        while (subMenu)
+        // Keeps user in ticket menu loop until user choose to go back (0)
+        bool subMenu = true; 
+        while (subMenu) 
         {
             Console.Clear();
             Console.WriteLine();
@@ -81,16 +81,16 @@ class Program
             Console.WriteLine();
             Console.Write("Select an action: ");
 
-            string? action = Console.ReadLine();
+            string? action = Console.ReadLine(); // Get user input for ticket menu
 
-            if (string.IsNullOrWhiteSpace(action))
+            if (string.IsNullOrWhiteSpace(action)) // Validates that the input is not null, empty, or whitespace. If it is, it displays error message and returns to menu.
             {
                 Console.WriteLine("Invalid input. Please enter a valid action.");
                 CountDownToMenu();
                 return;
             }
 
-            switch (action)
+            switch (action) // Handles ticket menu selection
             {
                 case "1":
                     CheckPrice();
@@ -110,7 +110,7 @@ class Program
     }
 
 
-    static void CheckPrice()
+    static void CheckPrice() // Determines the ticket price for a single customer based on their age and displays the corresponding price or message.
     {
         Console.WriteLine();
         Console.WriteLine("===== Ticket Price By Age =====");
@@ -125,7 +125,7 @@ class Program
         Console.WriteLine("---------------------------------");
         Console.WriteLine();
 
-        int age = ValidAgeInput("Enter the age of the customer: ");
+        int age = ValidAgeInput("Enter the age of the customer: "); 
         Console.WriteLine();
         if (age < 5 || age >= 100)
         {
@@ -151,17 +151,21 @@ class Program
 
 
 
-    static void GroupPrice()
+    static void GroupPrice() // Calculates the total price for a group based on age and organizes tickets by type.
+   
     {
         Console.WriteLine();
         Console.WriteLine("===== Total Price For Each Group =====");
         Console.WriteLine();
+        
+        int groupSize = ValidGroupSize("Enter the number of people in the group: "); // Get and validate the group size (1–150) using ValidGroupSize method (scroll down to find corresponding method). 
 
-        int groupSize = ValidGroupSize("Enter the number of people in the group: ");
+        
         Console.WriteLine();
 
         Console.WriteLine();
 
+        // Create separate lists for each ticket type (standard, senior, youth, free) to organize the receipt output.
         List<string> standardTickets = new();
         List<string> seniorTickets = new();
         List<string> youthTickets = new();
@@ -169,9 +173,9 @@ class Program
 
         int totalPrice = 0;
 
-        for (int i = 1; i <= groupSize; i++)
+        for (int i = 1; i <= groupSize; i++) // Loop through each person and determine ticket type and price. Track total price and group tickets by type for the receipt output at the end.
         {
-            int age = ValidAgeInput($"Enter the age of person {i}: ");
+            int age = ValidAgeInput($"Enter the age of person {i}: "); 
             Console.WriteLine();
 
             string ticketType;
@@ -203,14 +207,13 @@ class Program
                 
             }
 
-            totalPrice += price;
+            totalPrice += price; // Adds the price of the current ticket to the total price for the group, which will be displayed at the end of the receipt.
 
             Console.WriteLine();
-            string sortedLine = $"{(age + " yrs"),-10}{ticketType,-18}{price,5} SEK";
-
+            string sortedLine = $"{(age + " yrs"),-10}{ticketType,-18}{price,5} SEK"; // Formats age, ticket type, and price with aligned columns for clean receipt output.
             if (ticketType == "~ FREE ~")
             {
-                freeTickets.Add(sortedLine);
+                freeTickets.Add(sortedLine); 
             }
             else if (ticketType == "Youth (< 20)")
             {
@@ -239,33 +242,33 @@ class Program
         // Prints tickets order by: standard tickets first, then seniors, youth, and free tickets last
         int receiptNumber = 1;
 
-        foreach (var line in standardTickets)
+        foreach (var line in standardTickets) // Prints the standard tickets first, as they are added to the standardTickets list when the ticket type is "Standard"
         {
             Console.WriteLine($"{receiptNumber,-5}{line}");
             receiptNumber++;
         }
 
-        foreach (var line in seniorTickets)
+        foreach (var line in seniorTickets) // Prints the senior tickets after the standard tickets, as they are added to the seniorTickets list when the ticket type is "Senior (65+)"
         {
             Console.WriteLine($"{receiptNumber,-5}{line}");
             receiptNumber++;
         }
 
-        foreach (var line in youthTickets)
+        foreach (var line in youthTickets) // Prints the youth tickets after the senior tickets, as they are added to the youthTickets list when the ticket type is "Youth (< 20)"
         {
             Console.WriteLine($"{receiptNumber,-5}{line}");
             receiptNumber++;
         }
 
-        foreach (var line in freeTickets)
+        foreach (var line in freeTickets) // Prints the free tickets last, as they are added to the freeTickets list when the ticket type is "~ FREE ~"
         {
-            Console.WriteLine($"{receiptNumber,-5}{line}");
-            receiptNumber++;
+            Console.WriteLine($"{receiptNumber,-5}{line}"); 
+            receiptNumber++; 
         }
 
         Console.WriteLine();
         Console.WriteLine("-----------------------------------------------");
-        Console.WriteLine($"Total price for these ({groupSize} people):  {totalPrice} SEK");
+        Console.WriteLine($"Total price for these ({groupSize} people):  {totalPrice} SEK"); // Prints the total price for the group at the end of the receipt
         Console.WriteLine("-----------------------------------------------");
         Console.WriteLine();
 
@@ -274,30 +277,32 @@ class Program
         Console.ReadKey();
     }
 
-    static int ValidAgeInput(string message)
+    static int ValidAgeInput(string message) // This method validates the age input and ensures it's a number between 0 and 130. It keeps prompting the user until a valid input is provided.
     {
         Console.Write(message);
 
         int number;
-        while (!int.TryParse(Console.ReadLine(), out number) || number < 0 || number > 130)
+        while (!int.TryParse(Console.ReadLine(), out number) || number < 0 || number > 130) 
+        // Checks if the input is a valid integer and within the specified age range
         {
             Console.WriteLine();
             Console.Write("Invalid input. Please try again and enter a valid age between 0 and 130: ");
         }
 
-        return number;
+        return number; // Returns the valid age input as an integer
     }
 
-    static int ValidGroupSize(string message)
+    static int ValidGroupSize(string message) // This method validates the group size input and ensures it's a number between 1 and 150. It keeps prompting the user until a valid input is provided. If the input exceeds 150, it displays a message about large groups.
     {
         Console.Write(message);
 
         int number;
-        while (!int.TryParse(Console.ReadLine(), out number) || number <= 0 || number > 150)
+        while (!int.TryParse(Console.ReadLine(), out number) || number <= 0 || number > 150) 
+        // Checks if the input is a valid integer and within the specified group size range
         {
             Console.WriteLine();
 
-            if (number > 150)
+            if (number > 150) // If the input is greater than 150, it displays a message about large groups
             {
                 Console.WriteLine("~ Large group detected! ~");
                 Console.WriteLine("For groups over 150 people, please contact the cinema to book the entire venue. :)");
@@ -306,12 +311,12 @@ class Program
 
             Console.Write("Please enter a valid group size between 1 and 150: ");
         }
-        return number;
+        return number; // Returns the valid group size input as an integer
 
     }
 
 
-    static void LoopText10Times()
+    static void LoopText10Times() // This method prompts the user to enter a text and then repeats that text 10 times, separated by commas. It also includes input validation to ensure the user enters a non-empty text.
     {
         Console.WriteLine();
         Console.WriteLine("===== Repeat Text x10 times =====");
@@ -323,7 +328,7 @@ class Program
         string? input = Console.ReadLine();
         Console.WriteLine("--------------------------------------------------");
 
-        if (string.IsNullOrWhiteSpace(input))
+        if (string.IsNullOrWhiteSpace(input)) // Validates that the input is not null, empty, or whitespace. If it is, it displays an error message and returns to the menu.
         {
             Console.WriteLine("Invalid input. Please enter a non-empty text.");
             CountDownToMenu();
@@ -333,9 +338,9 @@ class Program
         Console.WriteLine();
 
 
-        for (int i = 1; i <= 10; i++)
+        for (int i = 1; i <= 10; i++) // Loops from 1 to 10, printing the input text along with the current iteration number. It also adds a comma after each line except the last one.
         {
-            Console.Write($"{i}. {input}");
+            Console.Write($"{i}. {input}"); // Prints the current iteration number and the input text
 
             if (i < 10)
             {
@@ -352,7 +357,7 @@ class Program
     }
 
 
-    static void GetThirdWord()
+    static void GetThirdWord() // This method prompts the user to enter a sentence and then extracts and displays the 3rd word from that sentence. It includes input validation to ensure the user enters a non-empty sentence with at least 3 words.
     {
         Console.WriteLine();
         Console.WriteLine("===== Find the 3rd word in the sentence =====");
@@ -364,16 +369,16 @@ class Program
         string? input = Console.ReadLine();
         Console.WriteLine("--------------------------------------------------");
 
-        if (string.IsNullOrWhiteSpace(input))
+        if (string.IsNullOrWhiteSpace(input)) // Validates that the input is not null, empty, or whitespace. If it is, it displays an error message and returns to the menu.
         {
             Console.WriteLine("Invalid input. Please enter a non-empty sentence.");
             CountDownToMenu();
             return;
         }
 
-        string[] words = input.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] words = input.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries); // Splits the input sentence into an array of words using space and tab as delimiters, and removes any empty entries from the resulting array.
 
-        if (words.Length < 3)
+        if (words.Length < 3) // Checks if the number of words in the array is less than 3. If it is, it displays an error message and returns to the menu.
         {
             Console.WriteLine("The sentence must contain at least 3 words. Please try again.");
             CountDownToMenu();
@@ -381,7 +386,7 @@ class Program
         }
 
         Console.WriteLine();
-        Console.WriteLine($"The 3rd word in the sentence is: '{words[2]}'");
+        Console.WriteLine($"The 3rd word in the sentence is: '{words[2]}'"); // Prints the 3rd word in the sentence
         Console.WriteLine();
 
         Console.WriteLine("Press any key to return to Menu...");
@@ -389,17 +394,17 @@ class Program
     }
 
 
-    static void CountDownToMenu()
+    static void CountDownToMenu() // This method is used to create a countdown effect before returning to the main menu. 
     {
         Console.WriteLine();
 
-        for (int i = 4; i > 0; i--)
+        for (int i = 4; i > 0; i--) // Loops from 4 down to 1, creating a countdown effect. It displays a message with the remaining seconds and then waits for 1 second before updating the message.
         {
-            Console.Write($"\rReturning to menu in {i}...   ");
-            Thread.Sleep(1000);
+            Console.Write($"\rReturning to menu in {i}...   "); // Displays the countdown message with the remaining seconds. The '\r' char is used to return the cursor to the beginning of the line.
+            Thread.Sleep(1000); // Pauses the execution of the program before continuing to the next iteration of the loop, creating a delay between each update of the countdown message.
         }
 
-        Console.WriteLine();
+        Console.WriteLine(); // After the countdown is complete, it prints a new line to move the cursor to the next line before returning to the menu.
 
     }
 
