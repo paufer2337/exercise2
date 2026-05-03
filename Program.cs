@@ -43,10 +43,10 @@ class Program
                 case "1":
                     TicketMenu();
                     break;
-                /*case "2":
-                    RepeatText10Times();
+                case "2":
+                    LoopText10Times();
                     break;
-                case "3":
+                /*case "3":
                     GetThirdWord();
                     break;*/
                 case "0":
@@ -310,6 +310,37 @@ class Program
 
     }
 
+
+    static void LoopText10Times()
+    {
+        Console.WriteLine();
+        Console.WriteLine("===== Repeat Text x10 times =====");
+        Console.WriteLine();
+
+        Console.WriteLine("Please enter the text you want to repeat 10 times: ");
+        string? input = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            Console.WriteLine("Invalid input. Please enter a non-empty text.");
+            CountDownToMenu();
+            return;
+        }
+
+        Console.WriteLine();
+        Console.WriteLine($"Repeating '{input}' 10 times:");
+        Console.WriteLine();
+
+        for (int i = 1; i <= 10; i++)
+        {
+            Console.WriteLine($"{i}. {input}");
+        }
+
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine("Press any key to return to Menu...");
+        Console.ReadKey();
+    }
 
     static void CountDownToMenu()
     {
