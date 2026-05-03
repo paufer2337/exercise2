@@ -44,10 +44,10 @@ class Program
                 case "1":
                     CheckPrice();
                     break;
-                /*case "2":
+                case "2":
                     GroupPrice();
                     break;
-                case "3":
+                /*case "3":
                     RepeatText10Times();
                     break;
                 case "4":
@@ -103,6 +103,59 @@ class Program
         Console.WriteLine();
 
         CountDownToMenu();
+    }
+
+
+    static void GroupPrice()
+    {
+        Console.WriteLine();
+        Console.WriteLine("===== Total Price For Each Group =====");
+        Console.WriteLine();
+
+        int groupSize = ValidAgeInput("Enter the number of people in the group: ");
+        Console.WriteLine();
+
+        int totalPrice = 0;
+
+        for (int i = 1; i <= groupSize; i++)
+        {
+            int age = ValidAgeInput($"Enter the age of person {i}: ");
+            Console.WriteLine();
+
+            if (age < 5 || age >= 100)
+            {
+                Console.WriteLine("The ticket is for Free! ~ WooHoo!");
+            }
+            else if (age < 20)
+            {
+                Console.WriteLine("The ticket price for youth is: 80 SEK.");
+                totalPrice += 80;
+            }
+            else if (age >= 65)
+            {
+                Console.WriteLine("The ticket price for seniors is: 90 SEK.");
+                totalPrice += 90;
+            }
+            else
+            {
+                Console.WriteLine("The standard ticket price is: 120 SEK.");
+                totalPrice += 120;
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine("-----------------------------------------------");
+        Console.WriteLine();
+        Console.WriteLine("===== Group Summary =====");
+        Console.WriteLine();
+        Console.WriteLine($"Number of people: {groupSize}");
+        Console.WriteLine($"Total price for this group: {totalPrice} SEK");
+        Console.WriteLine();
+        Console.WriteLine("-----------------------------------------------");
+        Console.WriteLine();
+
+        Console.WriteLine();
+        Console.WriteLine("Press any key to return to Menu...");
+        Console.ReadKey();
     }
 
     static int ValidAgeInput(string message)
