@@ -18,10 +18,10 @@ class Program
             Console.Clear();
             Console.WriteLine();
             Console.WriteLine("====================================");
-            Console.WriteLine("===== Cinema Exercise Overview =====");
+            Console.WriteLine("===== Loop Control Exercises =====");
             Console.WriteLine("====================================");
             Console.WriteLine();
-            Console.WriteLine("1. Check ticket pricing based on age (single / group)");
+            Console.WriteLine("1. Ticket pricing based on age (single / group)");
             Console.WriteLine("2. Repeat text x10 times");
             Console.WriteLine("3. Find the 3rd word in the sentence");
             Console.WriteLine();
@@ -31,14 +31,14 @@ class Program
 
             string? action = Console.ReadLine();
 
-            if (string.IsNullOrWhiteSpace(action)) // Validates that the input is not null, empty, or whitespace. If it is, it displays error message and returns to menu.
+            if (string.IsNullOrWhiteSpace(action)) // Validates that the input is not null, empty, or whitespace. If it is -> displays error message and returns to menu.
             {
                 Console.WriteLine("Invalid input. Please enter a valid action.");
                 CountDownToMenu();
                 continue;
             }
 
-            switch (action) // Switch statement that handles the user's selection in the main menu. Calling appropriate method based on the user-choice, or exits the program if user selects "0". If the input is invalid, it displays error message and returns to menu.
+            switch (action) // Switch statement that handles the user's selection in the main menu. Calling appropriate method based on the user-choice. Exits the program if user selects "0". If the input is invalid -> displays error message and returns to menu.
             {
                 case "1":
                     TicketMenu();
@@ -83,7 +83,7 @@ class Program
 
             string? action = Console.ReadLine(); // Get user input for ticket menu
 
-            if (string.IsNullOrWhiteSpace(action)) // Validates that the input is not null, empty, or whitespace. If it is, it displays error message and returns to menu.
+            if (string.IsNullOrWhiteSpace(action)) // Validates that the input is not null, empty, or whitespace. If it is -> displays error message and returns to menu.
             {
                 Console.WriteLine("Invalid input. Please enter a valid action.");
                 CountDownToMenu();
@@ -165,7 +165,7 @@ class Program
 
         Console.WriteLine();
 
-        // Create separate lists for each ticket type (standard, senior, youth, free) to organize the receipt output.
+        // Create separate lists for each ticket type (standard, senior, youth, free) to organize/sort the receipt output.
         List<string> standardTickets = new();
         List<string> seniorTickets = new();
         List<string> youthTickets = new();
@@ -210,7 +210,8 @@ class Program
             totalPrice += price; // Adds the price of the current ticket to the total price for the group, which will be displayed at the end of the receipt.
 
             Console.WriteLine();
-            string sortedLine = $"{(age + " yrs"),-10}{ticketType,-18}{price,5} SEK"; // Formats age, ticket type, and price with aligned columns for clean receipt output.
+            string sortedLine = $"{(age + " yrs"),-10}{ticketType,-18}{price,5} SEK"; // Formats age, ticket type, and price with aligned columns for clean receipt output
+            
             if (ticketType == "~ FREE ~")
             {
                 freeTickets.Add(sortedLine); 
@@ -232,7 +233,7 @@ class Program
 
         Console.Clear();
         Console.WriteLine("================================================");
-        Console.WriteLine("============== CINEMA RECEIPT ==================");
+        Console.WriteLine("============== GROUP SUMMARY ===================");
         Console.WriteLine("================================================");
         Console.WriteLine();
 
@@ -277,7 +278,9 @@ class Program
         Console.ReadKey();
     }
 
-    static int ValidAgeInput(string message) // This method validates the age input and ensures it's a number between 0 and 130. It keeps prompting the user until a valid input is provided.
+
+
+    static int ValidAgeInput(string message) // Validates the age input and ensures it's a number between 0 and 130. Keeps prompting user until valid input is provided
     {
         Console.Write(message);
 
@@ -292,7 +295,9 @@ class Program
         return number; // Returns the valid age input as an integer
     }
 
-    static int ValidGroupSize(string message) // This method validates the group size input and ensures it's a number between 1 and 150. It keeps prompting the user until a valid input is provided. If the input exceeds 150, it displays a message about large groups.
+
+
+    static int ValidGroupSize(string message) // Validates group size input + ensures it's a number between 1 and 150. Keeps prompting user until valid input is provided. If the input exceeds 150 -> displays a message about large groups.
     {
         Console.Write(message);
 
@@ -316,7 +321,8 @@ class Program
     }
 
 
-    static void LoopText10Times() // This method prompts the user to enter a text and then repeats that text 10 times, separated by commas. It also includes input validation to ensure the user enters a non-empty text.
+
+    static void LoopText10Times() // This method prompts the user to enter a text and then repeats that text 10 times, separated by commas. 
     {
         Console.WriteLine();
         Console.WriteLine("===== Repeat Text x10 times =====");
@@ -357,7 +363,8 @@ class Program
     }
 
 
-    static void GetThirdWord() // This method prompts the user to enter a sentence and then extracts and displays the 3rd word from that sentence. It includes input validation to ensure the user enters a non-empty sentence with at least 3 words.
+
+    static void GetThirdWord() // Prompts user to enter a sentence and then extracts + displays the 3rd word from that sentence.
     {
         Console.WriteLine();
         Console.WriteLine("===== Find the 3rd word in the sentence =====");
@@ -369,7 +376,7 @@ class Program
         string? input = Console.ReadLine();
         Console.WriteLine("--------------------------------------------------");
 
-        if (string.IsNullOrWhiteSpace(input)) // Validates that the input is not null, empty, or whitespace. If it is, it displays an error message and returns to the menu.
+        if (string.IsNullOrWhiteSpace(input)) // Validates that the input is not null, empty, or whitespace. If it is -> displays an error message and returns to menu.
         {
             Console.WriteLine("Invalid input. Please enter a non-empty sentence.");
             CountDownToMenu();

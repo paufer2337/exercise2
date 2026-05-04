@@ -4,7 +4,7 @@ ___________________________________________________________
 
 ¤ Hur är programmets struktur uppbyggd?
 
- - Program (UI + meny med huvudmeny och undermeny för biljetter)
+ - Program (UI + meny med huvudmeny och en submenu för biljetter)
 
 ===========================================================
 
@@ -18,7 +18,8 @@ ___________________________________________________________
 
 ~ Funktioner:
 |   CheckPrice      = Räknar ut biljettpris baserat på ålder                  |
-|   GroupPrice      = Räknar totalpris för grupp + genererar kvitto           |
+|   GroupPrice      = Räknar totalpris för grupp + genererar "kvitto"         |
+|                                                                             |
 |   RepeatText10    = Skriver ut text 10 gånger (utan radbrytning)            |
 |   GetThirdWord    = Hämtar tredje ordet från en mening                      |
 
@@ -50,10 +51,11 @@ ___________________________________________________________
 ¤ Extra funktionalitet:
 
 
-|   Input-validering   = Hanterar felaktig input                              |
-|   Begränsningar      = Ålder + gruppstorlek                                 |
+|   Input-validation   = Hanterar felaktig input                              |
+|   Restraints         = Ålder + gruppstorlek                                 |
 |   Stora grupper      = Meddelande vid >150 personer                         |
-|   UX/UI              = Undermeny, tydliga flöden, kvitto                    |
+|   UX/UI              = Undermeny, tydliga flöden, kvitto*                   |
+|                      ( * = Sorterar ticket per type = tydligare utskrift)   |
 
 ===========================================================
 
