@@ -13,7 +13,7 @@ class Program
         bool isRunning = true;
 
 
-        while (isRunning) // Main loop: runs until user selects exit (0)
+        while (isRunning) // Main loop: Keeps the main menu active until the user exits)
         {
             Console.Clear();
             Console.WriteLine();
@@ -31,14 +31,14 @@ class Program
 
             string? action = Console.ReadLine();
 
-            if (string.IsNullOrWhiteSpace(action)) // Validates that the input is not null, empty, or whitespace. If it is -> displays error message and returns to menu.
+            if (string.IsNullOrWhiteSpace(action)) // Prevents empty menu choices = input is not null, empty, or whitespace. If it is -> displays error message and returns to menu.
             {
                 Console.WriteLine("Invalid input. Please enter a valid action.");
                 CountDownToMenu();
                 continue;
             }
 
-            switch (action) // Switch statement that handles the user's selection in the main menu. Calling appropriate method based on the user-choice. Exits the program if user selects "0". If the input is invalid -> displays error message and returns to menu.
+            switch (action) // Routes the user to the selected main menu option
             {
                 case "1":
                     TicketMenu();
@@ -63,10 +63,10 @@ class Program
     }
     
 
-    static void TicketMenu() // Show ticket menu and let user choose single or group pricing
+    static void TicketMenu() // Keeps ticket-related choices grouped in a submenu
     {
         
-        // Keeps user in ticket menu loop until user choose to go back (0)
+        // Allows user to stay in ticket menu until going back
         bool subMenu = true; 
         while (subMenu) 
         {
@@ -83,7 +83,7 @@ class Program
 
             string? action = Console.ReadLine(); // Get user input for ticket menu
 
-            if (string.IsNullOrWhiteSpace(action)) // Validates that the input is not null, empty, or whitespace. If it is -> displays error message and returns to menu.
+            if (string.IsNullOrWhiteSpace(action)) // Prevents empty submenu choices = input is not null, empty, or whitespace. If it is -> displays error message and returns to submenu.
             {
                 Console.WriteLine("Invalid input. Please enter a valid action.");
                 CountDownToMenu();
@@ -110,7 +110,7 @@ class Program
     }
 
 
-    static void CheckPrice() // Determines the ticket price for a single customer based on their age and displays the corresponding price or message.
+    static void CheckPrice() // Determines the ticket price for one customer based on their age and displays the corresponding price or message.
     {
         Console.WriteLine();
         Console.WriteLine("===== Ticket Price By Age =====");
@@ -151,7 +151,7 @@ class Program
 
 
 
-    static void GroupPrice() // Calculates the total price for a group based on age and organizes tickets by type.
+    static void GroupPrice() //  Combines group calculation with receipt output to make the result easier to review
    
     {
         Console.WriteLine();
@@ -165,7 +165,7 @@ class Program
 
         Console.WriteLine();
 
-        // Create separate lists for each ticket type (standard, senior, youth, free) to organize/sort the receipt output.
+        // Separate lists for each ticket type to organize/sort the receipt output. Controls the receipt order without changing the input order
         List<string> standardTickets = new();
         List<string> seniorTickets = new();
         List<string> youthTickets = new();
@@ -210,7 +210,7 @@ class Program
             totalPrice += price; // Adds the price of the current ticket to the total price for the group, which will be displayed at the end of the receipt.
 
             Console.WriteLine();
-            string sortedLine = $"{(age + " yrs"),-10}{ticketType,-18}{price,5} SEK"; // Formats age, ticket type, and price with aligned columns for clean receipt output
+            string sortedLine = $"{(age + " yrs"),-10}{ticketType,-18}{price,5} SEK"; // Aligns receipt columns to make the summary easier to read
             
             if (ticketType == "~ FREE ~")
             {
